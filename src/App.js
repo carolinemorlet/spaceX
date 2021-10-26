@@ -1,4 +1,5 @@
 import './App.css';
+
 import { useQuery, gql } from '@apollo/client';
 
 const GET_LAUNCHES = gql`
@@ -26,16 +27,22 @@ function App() {
     <div className="App">
       <h1>my first apollo app</h1>
       <hr />
-      {data.launches.map((launche, { launch_success, rocket, links }) => (
+
+      {data.launches.map((launch, { rocket, links }) => (
         <ul>
-          <li>Launch date : {launche.launch_date_utc}</li>
-          <li>Success Launch : {launche.launch_success}</li>
+          <li>Launch date : {launch.launch_date_utc}</li>
           <br />
-          <li>Rocket Name : {launche.rocket.rocket_name}</li>
+
+          <li>
+            Success Launch :{' '}
+            {launch.launch_success === true ? 'success' : 'failed'}
+          </li>
           <br />
-          <li>Link : {launche.links.video_link}</li>
+          <li>Rocket Name : {launch.rocket.rocket_name}</li>
           <br />
-          <li>Description : {launche.details}</li>
+          <li>Link : {launch.links.video_link}</li>
+          <br />
+          <li>Description : {launch.details}</li>
           <br />
           <hr />
         </ul>
